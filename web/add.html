@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Item - Bill Shield</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1b4d;--blue:#2563eb;--muted:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px;color:#0f172a;
+  background:radial-gradient(circle at 12% 18%,#c7d9ff 0,transparent 38%),radial-gradient(circle at 88% 12%,#f5c6ff 0,transparent 36%),radial-gradient(circle at 80% 90%,#ffd9b8 0,transparent 36%),radial-gradient(circle at 10% 90%,#b8f0d8 0,transparent 34%),#eef3ff}
+.wrap{display:grid;grid-template-columns:.95fr 1.15fr;width:min(1080px,100%);background:#fff;border-radius:36px;overflow:hidden;box-shadow:0 50px 100px rgba(76,29,149,.28),0 10px 30px rgba(37,99,235,.18)}
+
+/* LEFT */
+.left{position:relative;overflow:hidden;color:#fff;padding:36px 34px;display:flex;flex-direction:column;background:linear-gradient(155deg,#0a1b66 0%,#2563eb 45%,#7c3aed 78%,#db2777 115%)}
+.blob{position:absolute;border-radius:50%;opacity:.5;animation:drift 9s ease-in-out infinite}
+.b1{width:240px;height:240px;background:radial-gradient(circle,#38bdf8,transparent 70%);top:-70px;right:-60px}
+.b2{width:220px;height:220px;background:radial-gradient(circle,#f472b6,transparent 70%);bottom:-60px;left:-70px;animation-delay:-3s}
+@keyframes drift{50%{transform:translate(16px,-20px) scale(1.08)}}
+.brand{position:relative;display:flex;align-items:center;gap:12px;font-size:24px;font-weight:800}
+.brand small{display:block;font-size:12px;font-weight:600;font-style:italic;color:#dbe6ff}
+.left h1{position:relative;font-size:32px;line-height:1.15;letter-spacing:-1px;margin:22px 0 8px}
+.left h1 span{background:linear-gradient(90deg,#fde047,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.left>p{position:relative;color:#e0e9ff;font-size:14px;line-height:1.5}
+.plabel{position:relative;margin:22px 0 10px;font-size:12px;font-weight:800;letter-spacing:1.5px;color:#cfe0ff}
+
+/* PREVIEW CARD */
+.pv{position:relative;background:#fff;color:var(--navy);border-radius:22px;padding:18px;box-shadow:0 26px 44px rgba(0,0,0,.3);overflow:hidden;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.pv::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--c,#cbd5e1);transition:.3s}
+.pvtop{display:flex;gap:14px;align-items:center}
+.pvic{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:var(--c,#cbd5e1);box-shadow:0 10px 20px rgba(0,0,0,.18);flex:none;transition:.3s}
+.pvname{font-weight:800;font-size:18px;line-height:1.2;word-break:break-word}
+.pvcat{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:800;color:#64748b;background:#e8eefc;padding:3px 10px;border-radius:20px}
+.pvbadge{margin-left:auto;flex:none;font-size:12px;font-weight:800;color:#fff;background:var(--c,#cbd5e1);padding:6px 12px;border-radius:20px;transition:.3s;white-space:nowrap}
+.pvrows{margin-top:12px}
+.pvrow{display:flex;justify-content:space-between;font-size:12.5px;color:#475569;margin-top:6px;gap:8px}
+.pvrow em{font-style:normal;font-weight:800}
+.pvbar{height:7px;border-radius:7px;background:#e2e8f0;margin-top:12px;overflow:hidden}
+.pvbar i{display:block;height:100%;width:0;border-radius:7px;background:var(--c,#cbd5e1);transition:width .6s,background .3s}
+.tips{position:relative;margin-top:auto;padding-top:22px;display:grid;gap:9px}
+.tip{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#eaf0ff}
+.tip i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none}
+
+/* RIGHT */
+.right{padding:36px 42px;background:linear-gradient(180deg,#fff,#fafbff)}
+.back{color:var(--blue);font-weight:700;font-size:14px;text-decoration:none}
+.right h2{font-size:32px;color:var(--navy);margin:12px 0 2px;letter-spacing:-1px}
+.sub{color:var(--muted);margin-bottom:16px;font-size:14px}
+.lab{display:block;font-weight:700;font-size:13px;color:var(--navy);margin:14px 0 6px}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cat{border:2px solid #e2e9ff;background:#f6f9ff;border-radius:18px;padding:12px 6px;cursor:pointer;font:inherit;font-weight:800;font-size:12.5px;color:#334155;display:flex;flex-direction:column;align-items:center;gap:7px;transition:.2s}
+.cat i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--c);box-shadow:0 8px 16px rgba(0,0,0,.14)}
+.cat:hover{transform:translateY(-3px)}
+.cat.on{background:color-mix(in srgb,var(--c) 12%,white);border-color:var(--c);color:var(--navy);box-shadow:0 12px 24px color-mix(in srgb,var(--c) 30%,transparent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{position:relative}
+.fld input{width:100%;padding:13px 14px;border-radius:14px;border:2px solid #dbe5ff;background:#f6f9ff;font:inherit;font-size:14.5px;color:#0f172a;transition:.2s}
+.fld input:focus{outline:none;border-color:#6366f1;background:#fff;box-shadow:0 0 0 5px rgba(99,102,241,.16)}
+.vbox{margin-top:6px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#fff4e8,#fff9f2);border:1.5px dashed #fdba74}
+.vbox h4{font-size:14px;color:#c2410c;display:flex;align-items:center;gap:8px}
+.hide{display:none}
+.go{margin-top:20px;width:100%;padding:16px;border:0;border-radius:40px;font:inherit;font-weight:800;font-size:16px;color:#fff;cursor:pointer;background:linear-gradient(120deg,#2563eb,#7c3aed 55%,#ec4899);background-size:150% 100%;box-shadow:0 16px 30px rgba(124,58,237,.38);transition:.25s}
+.go:hover{transform:translateY(-3px);background-position:100% 0}
+.msg{min-height:24px;margin-top:10px;font-weight:700;font-size:14px;text-align:center;color:#e11d48}
+.msg.ok{color:#16a34a}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.right{padding:28px 22px}.cats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}}
+</style>
+<style>
+body{display:block !important;padding:0 !important;min-height:100vh !important}
+.wrap{width:100% !important;max-width:none !important;min-height:100vh !important;border-radius:0 !important;box-shadow:none !important;grid-template-columns:.9fr 1.1fr !important}
+.left{padding:48px 56px !important}
+.left h1{font-size:44px !important}
+.right{padding:48px 80px !important;display:flex !important;flex-direction:column !important;justify-content:center !important}
+.right>*{max-width:760px;width:100%}
+.right h2{font-size:40px !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="left">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="brand"><svg width="44" height="50" viewBox="0 0 38 42"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#bfdbfe"/></linearGradient></defs><path d="M19 2L35 8V21C35 31 28 38 19 40C10 38 3 31 3 21V8Z" fill="url(#g)"/><path d="M11 21L17 27L27 15" stroke="#22c55e" stroke-width="3.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Bill Shield<small>Never Miss a Warranty</small></div></div>
+    <h1>Add it once.<br><span>We will remind you.</span></h1>
+    <p>Fill in the details on the right. This card shows how your item will look on the dashboard.</p>
+    <div class="plabel">LIVE PREVIEW</div>
+    <div class="pv" id="pv">
+      <div class="pvtop">
+        <div class="pvic" id="pvic"></div>
+        <div><div class="pvname" id="pvname">Your item name</div><span class="pvcat" id="pvcat">Electronics</span></div>
+        <span class="pvbadge" id="pvbadge">No date yet</span>
+      </div>
+      <div class="pvrows" id="pvrows"></div>
+      <div class="pvbar"><i id="pvbar"></i></div>
+    </div>
+    <div class="tips">
+      <div class="tip"><i style="background:#f97316"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/></svg></i>You get an alert 30 days before expiry</div>
+      <div class="tip"><i style="background:#16a34a"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></i>Vehicles track free service, insurance &amp; PUC</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <a class="back" href="dashboard.html">&larr; Back to Dashboard</a>
+    <h2>Add Item</h2>
+    <p class="sub">Choose a category, then fill in the dates.</p>
+
+    <span class="lab" style="margin-top:0">Category</span>
+    <div class="cats" id="cats"></div>
+
+    <form id="f" novalidate>
+      <label class="lab" for="name">Item name</label>
+      <div class="fld"><input id="name" placeholder="Example: Samsung TV, Honda Activa"></div>
+
+      <div class="grid2">
+        <div><label class="lab" for="purchase">Purchase date</label><div class="fld"><input id="purchase" type="date"></div></div>
+        <div><label class="lab" for="expiry">Warranty expiry date</label><div class="fld"><input id="expiry" type="date"></div></div>
+      </div>
+
+      <div class="vbox hide" id="vbox">
+        <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-5h11L19 16M4 16h16v3H4z"/><circle cx="8" cy="19" r="1"/><circle cx="16" cy="19" r="1"/></svg>Vehicle details</h4>
+        <label class="lab" for="vno">Vehicle number</label><div class="fld"><input id="vno" placeholder="Example: TS09AB1234"></div>
+        <div class="grid2">
+          <div><label class="lab" for="freeService">Free first service date</label><div class="fld"><input id="freeService" type="date"></div></div>
+          <div><label class="lab" for="insurance">Insurance expiry</label><div class="fld"><input id="insurance" type="date"></div></div>
+        </div>
+        <label class="lab" for="puc">PUC expiry</label><div class="fld"><input id="puc" type="date"></div>
+      </div>
+
+      <button class="go" id="go" type="submit">Save Item</button>
+      <p class="msg" id="msg"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+var KEY="billshieldItems";
+var CATS=[
+ {n:"Electronics",c:"#2563eb",p:'<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>'},
+ {n:"Appliances",c:"#16a34a",p:'<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 7h2"/>'},
+ {n:"Vehicle",c:"#f97316",p:'<path d="M5 16l1.5-5h11L19 16M4 16h16v3H4z"/><circle cx="8" cy="19" r="1"/><circle cx="16" cy="19" r="1"/>'},
+ {n:"Others",c:"#7c3aed",p:'<path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.3"/>'}];
+var cat="Electronics";
+function $(i){return document.getElementById(i)}
+function svg(p,s){return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function parse(s){if(!s)return null;var p=s.split("-");return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null}
+function today(){var d=new Date();d.setHours(0,0,0,0);return d}
+function daysLeft(s){var d=parse(s);return d?Math.round((d-today())/864e5):null}
+function color(d){return d<0?"#ef4444":d<=30?"#f97316":"#16a34a"}
+function text(d){return d<0?"Expired "+Math.abs(d)+" days ago":d<=30?"Due in "+d+" days":d+" days left"}
+function say(t,ok){var m=$("msg");m.textContent=t;m.className="msg"+(ok?" ok":"");if(!ok){m.classList.remove("shake");void m.offsetWidth;m.classList.add("shake")}}
+
+/* category cards */
+var ch="";CATS.forEach(function(c){ch+='<button type="button" class="cat'+(c.n===cat?' on':'')+'" data-n="'+c.n+'" style="--c:'+c.c+'"><i>'+svg(c.p,20)+'</i>'+c.n+'</button>'});
+$("cats").innerHTML=ch;
+document.querySelectorAll(".cat").forEach(function(b){b.onclick=function(){
+  cat=b.dataset.n;document.querySelectorAll(".cat").forEach(function(x){x.classList.toggle("on",x===b)});
+  $("vbox").classList.toggle("hide",cat!=="Vehicle");preview();$("name").focus()}});
+
+/* live preview */
+function preview(){
+  var c=CATS.filter(function(x){return x.n===cat})[0];
+  var list=[["Warranty expiry",$("expiry").value]];
+  if(cat==="Vehicle"){list.push(["Free service",$("freeService").value],["Insurance",$("insurance").value],["PUC",$("puc").value])}
+  var worst=1e9,rows="";
+  list.forEach(function(f){var d=daysLeft(f[1]);if(d===null)return;if(d<worst)worst=d;rows+='<div class="pvrow"><span>'+f[0]+': '+esc(f[1])+'</span><em style="color:'+color(d)+'">'+text(d)+'</em></div>'});
+  var col=worst===1e9?"#cbd5e1":color(worst);
+  $("pv").style.setProperty("--c",col);
+  $("pvic").innerHTML=svg(c.p,26);
+  $("pvname").textContent=$("name").value.trim()||"Your item name";
+  $("pvcat").textContent=cat;
+  $("pvbadge").textContent=worst===1e9?"No date yet":text(worst);
+  $("pvrows").innerHTML=(cat==="Vehicle"&&$("vno").value.trim()?'<div class="pvrow"><span>Vehicle no: '+esc($("vno").value.trim())+'</span></div>':'')+rows;
+  var pu=parse($("purchase").value),ex=parse($("expiry").value),w=0;
+  if(pu&&ex&&ex>pu)w=Math.max(0,Math.min(100,(today()-pu)/(ex-pu)*100));
+  $("pvbar").style.width=w+"%";
+}
+document.querySelectorAll("#f input").forEach(function(i){i.addEventListener("input",preview);i.addEventListener("change",preview)});
+
+/* ENTER KEY: go to the next box; save only from the last box */
+$("f").addEventListener("keydown",function(e){
+  if(e.key!=="Enter"||e.target.tagName!=="INPUT")return;
+  e.preventDefault();
+  var all=Array.prototype.slice.call(document.querySelectorAll("#f input")).filter(function(i){return i.offsetParent!==null});
+  var k=all.indexOf(e.target);
+  if(k<all.length-1)all[k+1].focus();else $("f").requestSubmit();
+});
+
+/* SAVE */
+$("f").addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=$("name").value.trim();
+  if(!name){say("Please type the item name.");$("name").focus();return}
+  if(!$("expiry").value){say("Please choose the warranty expiry date.");$("expiry").focus();return}
+  if($("purchase").value&&$("expiry").value<=$("purchase").value){say("Expiry date must be after the purchase date.");$("expiry").focus();return}
+  if(cat==="Vehicle"&&!$("vno").value.trim()){say("Please type the vehicle number.");$("vno").focus();return}
+  var items=[];try{items=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(x){}
+  items.push({category:cat,name:name,purchase:$("purchase").value,expiry:$("expiry").value,
+    vno:cat==="Vehicle"?$("vno").value.trim().toUpperCase():"",
+    freeService:cat==="Vehicle"?$("freeService").value:"",
+    insurance:cat==="Vehicle"?$("insurance").value:"",
+    puc:cat==="Vehicle"?$("puc").value:""});
+  localStorage.setItem(KEY,JSON.stringify(items));
+  say("Saved! Opening your dashboard...",true);
+  setTimeout(function(){location.href="dashboard.html"},800);
+});
+preview();
+</script>
+</body>
+</html>

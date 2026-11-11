@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Bill Shield</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1b4d;--blue:#2563eb;--violet:#7c3aed;--pink:#ec4899;--orange:#f97316;--green:#16a34a;--muted:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px;color:#0f172a;
+  background:radial-gradient(circle at 12% 18%,#c7d9ff 0,transparent 38%),radial-gradient(circle at 88% 12%,#f5c6ff 0,transparent 36%),radial-gradient(circle at 80% 90%,#ffd9b8 0,transparent 36%),radial-gradient(circle at 10% 90%,#b8f0d8 0,transparent 34%),#eef3ff}
+.wrap{display:grid;grid-template-columns:1.08fr 1fr;width:min(1060px,100%);background:#fff;border-radius:36px;overflow:hidden;box-shadow:0 50px 100px rgba(76,29,149,.28),0 10px 30px rgba(37,99,235,.18)}
+
+/* LEFT */
+.left{position:relative;overflow:hidden;color:#fff;padding:40px 38px 0;display:flex;flex-direction:column;min-height:640px;
+  background:linear-gradient(155deg,#0a1b66 0%,#2563eb 45%,#7c3aed 78%,#db2777 115%)}
+.blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;animation:drift 9s ease-in-out infinite}
+.b1{width:260px;height:260px;background:radial-gradient(circle,#38bdf8,transparent 70%);top:-80px;right:-60px}
+.b2{width:220px;height:220px;background:radial-gradient(circle,#f472b6,transparent 70%);bottom:120px;left:-90px;animation-delay:-3s}
+.b3{width:160px;height:160px;background:radial-gradient(circle,#fbbf24,transparent 70%);top:40%;right:-40px;animation-delay:-5s}
+@keyframes drift{50%{transform:translate(18px,-22px) scale(1.08)}}
+.brand{position:relative;display:flex;align-items:center;gap:12px;font-size:26px;font-weight:800}
+.brand small{display:block;font-size:12px;font-weight:600;font-style:italic;color:#dbe6ff;margin-top:2px}
+.left h1{position:relative;font-size:38px;line-height:1.12;letter-spacing:-1px;margin:26px 0 10px}
+.left h1 span{background:linear-gradient(90deg,#fde047,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.left>p{position:relative;color:#e0e9ff;max-width:380px;line-height:1.5}
+.feats{position:relative;display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.feat{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:30px;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);font-weight:700;font-size:13px}
+.feat i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center}
+.art2{position:relative;margin-top:auto;width:108%;margin-left:-4%;height:auto;overflow:visible}
+.float{animation:bob 5s ease-in-out infinite}.f2{animation-duration:6.5s;animation-delay:-2s}.f3{animation-duration:5.5s;animation-delay:-1s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* RIGHT */
+.right{padding:44px 46px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#fff,#fafbff)}
+.back{color:var(--blue);font-weight:700;font-size:14px;text-decoration:none;align-self:flex-start}
+.right h2{font-size:34px;color:var(--navy);margin:16px 0 4px;letter-spacing:-1px}
+.sub{color:var(--muted);margin-bottom:20px}
+.tabs{display:flex;background:#eaf0ff;border-radius:40px;padding:5px;margin-bottom:12px}
+.tabs button{flex:1;padding:13px;border:0;background:none;border-radius:40px;font:inherit;font-weight:800;color:#475569;cursor:pointer;transition:.25s}
+.tabs button.on{background:linear-gradient(90deg,#2563eb,#7c3aed);color:#fff;box-shadow:0 10px 22px rgba(79,70,229,.4)}
+.field{position:relative;margin-top:14px}
+.field label{display:block;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px}
+.field .ic{position:absolute;left:14px;bottom:13px;width:22px;height:22px}
+.field input{width:100%;padding:14px 46px 14px 46px;border-radius:16px;border:2px solid #dbe5ff;background:#f6f9ff;font:inherit;font-size:15px;transition:.2s}
+.field input:focus{outline:none;border-color:#6366f1;background:#fff;box-shadow:0 0 0 5px rgba(99,102,241,.16)}
+.eye{position:absolute;right:12px;bottom:10px;width:30px;height:30px;border:0;background:none;cursor:pointer;display:grid;place-items:center;border-radius:50%}
+.eye:hover{background:#eef2ff}
+.hide{display:none!important}
+.forgot{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;cursor:pointer}
+.forgot:hover{text-decoration:underline}
+.rowr{text-align:right}
+.go{margin-top:22px;width:100%;padding:16px;border:0;border-radius:40px;font:inherit;font-weight:800;font-size:16px;color:#fff;cursor:pointer;background:linear-gradient(120deg,#2563eb,#7c3aed 55%,#ec4899);background-size:150% 100%;box-shadow:0 16px 30px rgba(124,58,237,.38);transition:.25s}
+.go:hover{transform:translateY(-3px);background-position:100% 0;box-shadow:0 22px 38px rgba(124,58,237,.46)}
+.msg{min-height:24px;margin-top:12px;font-weight:700;font-size:14px;text-align:center;color:#e11d48}
+.msg.ok{color:var(--green)}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.cats{display:flex;justify-content:center;gap:10px;margin-top:6px;flex-wrap:wrap}
+.cats span{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:30px;font-size:12.5px;font-weight:800}
+.note{margin-top:16px;color:#94a3b8;font-size:12px;text-align:center}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.left{min-height:auto;padding-bottom:0}.left h1{font-size:30px}.right{padding:32px 26px}}
+body{padding:0!important;display:block!important}
+.wrap{width:100%!important;max-width:none!important;min-height:100vh!important;border-radius:0!important;box-shadow:none!important}
+.left{min-height:100vh}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="sw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#bfdbfe"/></linearGradient>
+<symbol id="shield" viewBox="0 0 38 42"><path d="M19 2L35 8V21C35 31 28 38 19 40C10 38 3 31 3 21V8Z" fill="url(#sw)"/><path d="M11 21L17 27L27 15" stroke="#22c55e" stroke-width="3.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <div class="left">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+    <div class="brand"><svg width="46" height="52"><use href="#shield"/></svg><div>Bill Shield<small>Never Miss a Warranty</small></div></div>
+    <h1>Protect every bill,<br><span>warranty &amp; service date.</span></h1>
+    <p>Phones, laptops, home appliances and your vehicle. Bill Shield remembers every expiry so you never pay for a repair you were covered for.</p>
+    <div class="feats">
+      <div class="feat"><i style="background:#f97316"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/></svg></i>Smart alerts</div>
+      <div class="feat"><i style="background:#16a34a"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></i>Vehicle service &amp; PUC</div>
+      <div class="feat"><i style="background:#ec4899"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></i>Safe &amp; private</div>
+    </div>
+<svg class="art2" viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+<linearGradient id="hd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#9333ea"/></linearGradient>
+<linearGradient id="cal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e11d48"/></linearGradient>
+<linearGradient id="bel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+<linearGradient id="mail" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+<linearGradient id="grn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#15803d"/></linearGradient>
+<linearGradient id="btn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+<radialGradient id="glw" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="sh2" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity=".3"/></filter>
+</defs>
+
+<ellipse cx="260" cy="160" rx="250" ry="130" fill="url(#glw)"/>
+<ellipse cx="260" cy="165" rx="235" ry="105" fill="none" stroke="#fff" stroke-opacity=".28" stroke-dasharray="3 7" stroke-width="1.6"/>
+<ellipse cx="260" cy="165" rx="175" ry="78" fill="none" stroke="#fff" stroke-opacity=".18" stroke-dasharray="2 6" stroke-width="1.4"/>
+<circle cx="40" cy="40" r="2.5" fill="#fff" opacity=".8"/><circle cx="490" cy="130" r="2" fill="#fff" opacity=".7"/><circle cx="120" cy="20" r="1.8" fill="#fde047"/><circle cx="330" cy="14" r="2.2" fill="#fff" opacity=".7"/><circle cx="505" cy="245" r="2.4" fill="#f9a8d4"/><circle cx="18" cy="190" r="2" fill="#fde047"/>
+
+<!-- PHONE -->
+<g filter="url(#sh2)">
+<rect x="200" y="30" width="120" height="258" rx="24" fill="#0b1220"/>
+<rect x="206" y="36" width="108" height="246" rx="19" fill="#f4f7ff"/>
+<path d="M206 55 a19 19 0 0 1 19 -19 h70 a19 19 0 0 1 19 19 v36 h-108 z" fill="url(#hd)"/>
+<rect x="246" y="41" width="28" height="6" rx="3" fill="#0b1220"/>
+<text x="260" y="70" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">Bill Shield</text>
+<rect x="238" y="77" width="44" height="4" rx="2" fill="#fff" opacity=".45"/>
+<!-- progress ring -->
+<circle cx="260" cy="118" r="17" fill="#fff" stroke="#e8eefc" stroke-width="6"/>
+<circle cx="260" cy="118" r="17" fill="none" stroke="#16a34a" stroke-width="6" stroke-dasharray="62 107" stroke-linecap="round" transform="rotate(-90 260 118)"/>
+<circle cx="260" cy="118" r="17" fill="none" stroke="#f97316" stroke-width="6" stroke-dasharray="20 149" stroke-dashoffset="-66" stroke-linecap="round" transform="rotate(-90 260 118)"/>
+<use href="#shield" x="251" y="108" width="18" height="20"/>
+<!-- cards -->
+<rect x="212" y="144" width="96" height="30" rx="9" fill="#fff" stroke="#e2e8f0"/><rect x="212" y="149" width="3.5" height="20" rx="2" fill="#2563eb"/>
+<circle cx="229" cy="159" r="8" fill="#2563eb"/><rect x="224.5" y="154.5" width="9" height="6.5" rx="1.2" stroke="#fff" stroke-width="1.2" fill="none"/><path d="M227 164h4" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+<rect x="243" y="152" width="36" height="5" rx="2.5" fill="#0b1b4d" opacity=".8"/><rect x="243" y="162" width="24" height="4" rx="2" fill="#cbd5e1"/><circle cx="294" cy="159" r="5" fill="#16a34a"/><path d="M291.5 159l2 2 3.5-4" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="212" y="180" width="96" height="30" rx="9" fill="#fff" stroke="#e2e8f0"/><rect x="212" y="185" width="3.5" height="20" rx="2" fill="#16a34a"/>
+<circle cx="229" cy="195" r="8" fill="#16a34a"/><rect x="225.5" y="190.5" width="7" height="9" rx="1.6" stroke="#fff" stroke-width="1.2" fill="none"/>
+<rect x="243" y="188" width="30" height="5" rx="2.5" fill="#0b1b4d" opacity=".8"/><rect x="243" y="198" width="28" height="4" rx="2" fill="#cbd5e1"/><circle cx="294" cy="195" r="5" fill="#16a34a"/><path d="M291.5 195l2 2 3.5-4" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="212" y="216" width="96" height="30" rx="9" fill="#fff" stroke="#e2e8f0"/><rect x="212" y="221" width="3.5" height="20" rx="2" fill="#f97316"/>
+<circle cx="229" cy="231" r="8" fill="#f97316"/><path d="M225 232l1.5-4h5l1.5 4m-8 0h8v3h-8z" stroke="#fff" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+<rect x="243" y="224" width="34" height="5" rx="2.5" fill="#0b1b4d" opacity=".8"/><rect x="243" y="234" width="22" height="4" rx="2" fill="#cbd5e1"/><circle cx="294" cy="231" r="5" fill="#f97316"/><path d="M294 228.2v3.4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="294" cy="233.6" r=".9" fill="#fff"/>
+<rect x="206" y="256" width="108" height="26" rx="0" fill="#fff"/><path d="M206 256 h108 v1 h-108z" fill="#e2e8f0"/>
+<circle cx="236" cy="268" r="3" fill="#2563eb"/><circle cx="260" cy="268" r="3" fill="#cbd5e1"/><circle cx="284" cy="268" r="3" fill="#cbd5e1"/>
+</g>
+
+<!-- CALENDAR -->
+<g class="float f2" filter="url(#sh2)" transform="rotate(-6 95 135)">
+<rect x="34" y="72" width="122" height="132" rx="16" fill="#fff"/>
+<path d="M34 88 a16 16 0 0 1 16 -16 h90 a16 16 0 0 1 16 16 v14 h-122 z" fill="url(#cal)"/>
+<circle cx="62" cy="72" r="4" fill="#fff"/><circle cx="128" cy="72" r="4" fill="#fff"/>
+<rect x="68" y="85" width="54" height="6" rx="3" fill="#fff" opacity=".85"/>
+<rect x="40" y="118" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="62" y="118" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="84" y="118" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="106" y="118" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="128" y="118" width="17" height="12" rx="4" fill="#16a34a"/>
+<rect x="40" y="134" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="62" y="134" width="17" height="12" rx="4" fill="#16a34a"/>
+<rect x="84" y="134" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="106" y="134" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="128" y="134" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="40" y="150" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="62" y="150" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="84" y="150" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="106" y="150" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="128" y="150" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="40" y="166" width="17" height="12" rx="4" fill="#16a34a"/>
+<rect x="62" y="166" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="106" y="166" width="17" height="12" rx="4" fill="#e8eefc"/>
+<rect x="128" y="166" width="17" height="12" rx="4" fill="#e8eefc"/>
+<!-- highlighted day with bell -->
+<rect x="80" y="166" width="25" height="18" rx="6" fill="url(#cal)"/>
+<path d="M88.5 178v-2.5a4 4 0 0 1 8 0v2.5l1.2 1.2h-10.4z" fill="#fff"/>
+<rect x="46" y="188" width="76" height="5" rx="2.5" fill="#cbd5e1"/>
+</g>
+
+<!-- NOTIFICATION -->
+<g class="float f3" filter="url(#sh2)" transform="rotate(5 425 118)">
+<rect x="352" y="70" width="152" height="82" rx="14" fill="#fff"/>
+<circle cx="374" cy="92" r="13" fill="url(#mail)"/><rect x="367" y="87" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M367.5 88l6.5 5 6.5-5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+<rect x="393" y="83" width="60" height="6" rx="3" fill="#0b1b4d" opacity=".85"/><rect x="393" y="94" width="36" height="4.5" rx="2.2" fill="#cbd5e1"/>
+<circle cx="487" cy="89" r="6" fill="#f97316"/><path d="M484 91v-2a3 3 0 0 1 6 0v2l1 1h-8z" fill="#fff"/>
+<rect x="362" y="112" width="126" height="5" rx="2.5" fill="#e2e8f0"/><rect x="362" y="122" width="98" height="5" rx="2.5" fill="#e2e8f0"/>
+<rect x="362" y="134" width="50" height="11" rx="5.5" fill="url(#btn)"/><path d="M382 139.5h10m-3.5-3l3.5 3-3.5 3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<!-- PROTECTION CARD -->
+<g class="float" filter="url(#sh2)">
+<rect x="346" y="184" width="158" height="54" rx="14" fill="#fff"/>
+<circle cx="370" cy="211" r="14" fill="url(#grn)"/><path d="M363 211l5 5 9-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="392" y="199" width="58" height="6" rx="3" fill="#0b1b4d" opacity=".85"/><rect x="392" y="210" width="40" height="4.5" rx="2.2" fill="#cbd5e1"/>
+<circle cx="398" cy="226" r="5" fill="#2563eb"/><circle cx="414" cy="226" r="5" fill="#16a34a"/><circle cx="430" cy="226" r="5" fill="#f97316"/><circle cx="446" cy="226" r="5" fill="#ec4899"/>
+<path d="M395.5 226l2 2 3.5-4M411.5 226l2 2 3.5-4M427.5 226l2 2 3.5-4M443.5 226l2 2 3.5-4" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<!-- BELL -->
+<g class="float f2" filter="url(#sh2)">
+<circle cx="172" cy="236" r="19" fill="url(#bel)"/>
+<path d="M164 241v-5a8 8 0 0 1 16 0v5l2.5 2.5h-21z" fill="#fff"/><path d="M169 246h6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="184" cy="224" r="5" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+</g>
+
+<!-- SHIELD -->
+<g class="float"><use href="#shield" x="430" y="0" width="60" height="67"/></g>
+</svg>
+
+  </div>
+
+  <div class="right">
+    <a class="back" href="index.html">&larr; Back to Home</a>
+    <h2 id="title">Welcome back</h2>
+    <p class="sub" id="sub">Login to see your warranties</p>
+    <div class="tabs" id="tabs"><button id="tLogin" class="on" type="button">Login</button><button id="tSignup" type="button">Sign Up</button></div>
+
+    <form id="f" novalidate autocomplete="on">
+      <div class="field hide" id="nameBox"><label for="fullname">Full name</label>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <input id="fullname" placeholder="Your name" autocomplete="name"></div>
+      <div class="field" id="emailBox"><label for="email">Email</label>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg>
+        <input id="email" type="text" inputmode="email" placeholder="you@example.com" autocomplete="email"></div>
+      <div class="field hide" id="codeBox"><label for="code">6-digit code</label>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <input id="code" inputmode="numeric" maxlength="6" placeholder="Type the 6- digit code" autocomplete="off"></div>
+      <div class="field" id="passBox"><label for="password" id="passLabel">Password</label>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+        <input id="password" type="password" placeholder="At least 6 characters" autocomplete="current-password">
+        <button class="eye" id="eye" type="button" title="Show / hide password"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+      <div class="rowr"><a class="forgot" id="forgot" href="#">Forgot password?</a><a class="forgot hide" id="backLogin" href="#">&larr; Back to login</a></div>
+      <button class="go" id="go" type="submit">Login</button>
+      <p class="msg" id="msg"></p>
+    </form>
+
+    <div class="cats">
+      <span style="background:#e0ecff;color:#1d4ed8">Electronics</span>
+      <span style="background:#d9f7e6;color:#15803d">Appliances</span>
+      <span style="background:#ffe8d1;color:#c2410c">Vehicles</span>
+      <span style="background:#fde1f0;color:#be185d">Bills</span>
+    </div>
+    <p class="note">Your account is saved safely by the Bill Shield Java server.</p>
+  </div>
+</div>
+
+<script>
+var mode="login";   /* login, signup, forgot1 (ask email), forgot2 (code + new password) */
+function $(i){return document.getElementById(i)}
+function show(id,on){$(id).classList.toggle("hide",!on)}
+
+function setMode(m){
+  mode=m;
+  var f=(m==="forgot1"||m==="forgot2");
+  show("tabs",!f);
+  $("tLogin").classList.toggle("on",m==="login");$("tSignup").classList.toggle("on",m==="signup");
+  show("nameBox",m==="signup");
+  show("codeBox",m==="forgot2");
+  show("passBox",m!=="forgot1");
+  show("forgot",m==="login");
+  show("backLogin",f);
+  $("passLabel").textContent=m==="forgot2"?"New password":"Password";
+  $("password").placeholder=m==="forgot2"?"Type your new password":"At least 6 characters";
+  $("password").autocomplete=m==="login"?"current-password":"new-password";
+  var T={login:["Welcome back","Login to see your warranties","Login"],
+         signup:["Create your account","Start protecting your bills today","Create Account"],
+         forgot1:["Forgot password?","Type your email. We will make a 6-digit code.","Send reset code"],
+         forgot2:["Reset password","Type the code and choose a new password.","Change password"]}[m];
+  $("title").textContent=T[0];$("sub").textContent=T[1];$("go").textContent=T[2];
+  $("msg").textContent="";
+}
+function say(t,ok){var m=$("msg");m.textContent=t;m.className="msg"+(ok?" ok":"");if(!ok){m.classList.remove("shake");void m.offsetWidth;m.classList.add("shake")}}
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
+$("tLogin").onclick=function(){setMode("login");$("email").focus()};
+$("tSignup").onclick=function(){setMode("signup");$("fullname").focus()};
+$("forgot").onclick=function(e){e.preventDefault();setMode("forgot1");$("email").focus()};
+$("backLogin").onclick=function(e){e.preventDefault();setMode("login");$("email").focus()};
+$("eye").onclick=function(){var p=$("password");p.type=p.type==="password"?"text":"password"};
+
+/* ENTER KEY: go to the next visible box; submit from the last one */
+$("f").addEventListener("keydown",function(e){
+  if(e.key!=="Enter"||e.target.tagName!=="INPUT")return;
+  e.preventDefault();
+  var all=Array.prototype.slice.call(document.querySelectorAll("#f input")).filter(function(i){return i.offsetParent!==null});
+  var k=all.indexOf(e.target);
+  if(k<all.length-1)all[k+1].focus();else $("f").requestSubmit();
+});
+
+/* talk to the Java server */
+function api(url,data,done){
+  $("go").disabled=true;
+  fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
+  .then(function(r){return r.json()})
+  .then(function(d){$("go").disabled=false;done(d)})
+  .catch(function(){$("go").disabled=false;say("Cannot reach the Java server. Is it running?")});
+}
+
+$("f").addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=$("fullname").value.trim(),email=$("email").value.trim().toLowerCase(),pw=$("password").value,code=$("code").value.trim();
+
+  if(mode==="signup"&&!name){say("Please type your name.");$("fullname").focus();return}
+  if(!email){say("Please type your email.");$("email").focus();return}
+  if(!validEmail(email)){say("That email does not look right. Example: name@gmail.com");$("email").focus();return}
+
+  if(mode==="forgot1"){
+    api("/api/forgot",{email:email},function(d){
+      if(!d.ok){say(d.error||"Something went wrong.");return}
+      setMode("forgot2");
+      say("code sent! please check your email inbox (also spam).",true);
+      $("code").focus();
+    });
+    return;
+  }
+  if(mode==="forgot2"){
+    if(!/^[0-9]{6}$/.test(code)){say("Please type the 6-digit code.");$("code").focus();return}
+    if(pw.length<6){say("New password must have at least 6 characters.");$("password").focus();return}
+    api("/api/reset",{email:email,code:code,password:pw},function(d){
+      if(!d.ok){say(d.error||"Something went wrong.");return}
+      say("Password changed! Taking you to login...",true);
+      setTimeout(function(){
+        setMode("login");$("code").value="";$("password").value="";
+        say("Now login with your new password.",true);$("password").focus();
+      },1300);
+    });
+    return;
+  }
+
+  if(pw.length<6){say("Password must have at least 6 characters.");$("password").focus();return}
+  api(mode==="signup"?"/api/signup":"/api/login",{name:name,email:email,password:pw},function(d){
+    if(!d.ok){say(d.error||"Something went wrong.");return}
+    localStorage.setItem("billshieldCurrent",JSON.stringify({name:d.name,email:d.email}));
+    try{
+  var me=String(d.email).toLowerCase(), owner=localStorage.getItem("bsOwner");
+  if(owner && owner!==me){
+    localStorage.setItem("bsItems_"+owner, localStorage.getItem("billshieldItems")||"[]");
+    localStorage.setItem("billshieldItems", localStorage.getItem("bsItems_"+me)||"[]");
+  }
+  localStorage.setItem("bsOwner",me);
+}catch(e){}
+    say(mode==="signup"?"Account created! Opening your dashboard...":"Welcome back, "+d.name.split(" ")[0]+"!",true);
+    setTimeout(function(){location.href="dashboard.html"},700);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Details - Bill Shield</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1b4d;--blue:#2563eb;--violet:#7c3aed;--muted:#64748b;--line:#e2e8f0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',Arial,sans-serif;background:#eef3ff;color:var(--navy)}
+a{text-decoration:none;color:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#fff;box-shadow:0 2px 14px rgba(37,99,235,.08)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.logo small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
+.logo .sh{width:34px;height:38px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav{display:flex;gap:26px;font-weight:600}
+.nav a{position:relative;padding:6px 2px}
+.badge{position:absolute;top:-8px;right:-14px;background:#ef4444;color:#fff;font-size:11px;border-radius:10px;padding:1px 6px}
+.avs{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.wrap{display:grid;grid-template-columns:260px 1fr;gap:22px;padding:24px 28px;max-width:1300px;margin:auto}
+.side{background:#fff;border-radius:20px;padding:16px;height:fit-content}
+.side a{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;font-weight:600;margin-bottom:4px;cursor:pointer}
+.side a.on{background:linear-gradient(120deg,#2563eb,#3b82f6);color:#fff}
+.side a:hover:not(.on){background:#f0f4ff}
+.banner{border-radius:22px;padding:28px;color:#fff;display:flex;align-items:center;gap:24px;background:linear-gradient(120deg,#1d4ed8,#3b82f6 60%,#7c3aed)}
+.big{width:104px;height:104px;border-radius:50%;background:#1e40af;border:5px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800}
+.banner h1{font-size:32px}
+.banner p{opacity:.95;margin-top:6px}
+.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-top:20px}
+.card{background:#fff;border-radius:20px;padding:22px}
+.card h2{font-size:18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 16px;font:600 14px inherit;cursor:pointer}
+.btn.pri{background:linear-gradient(120deg,#2563eb,#7c3aed);color:#fff;border:0}
+.row{display:flex;gap:10px;padding:11px 0;border-top:1px solid var(--line);align-items:center}
+.row span{width:130px;color:var(--muted)}
+.row b{font-weight:600;word-break:break-all}
+.row input{flex:1;padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tile{border-radius:16px;padding:16px 8px;text-align:center;font-size:13px}
+.tile b{display:block;font-size:30px;margin-bottom:4px}
+.t1{background:#e0ecff}.t2{background:#ede7ff}.t3{background:#dcfce7}.t4{background:#fee2e2}
+.act{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.act a{padding:16px;border-radius:14px;font-weight:700;display:flex;justify-content:space-between}
+.a1{background:#e0ecff}.a2{background:#ede7ff}.a3{background:#dcfce7}.a4{background:#ffedd5}
+.item{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);gap:10px}
+.item i{font-style:normal;color:var(--muted);font-size:13px}
+.red{color:#dc2626}.org{color:#ea580c}.grn{color:#16a34a}
+.empty{color:var(--muted)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.nav{display:none}.tiles{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo"><div class="sh">&#10003;</div><div>Bill Shield<small>Never miss a warranty</small></div></div>
+  <div class="nav">
+    <a href="dashboard.html">Home</a>
+    <a href="#rem">Reminders<span class="badge" id="badge">0</span></a>
+    <a href="add.html">Add Item</a>
+    <a href="index.html">Help</a>
+  </div>
+  <div class="avs" id="topAv">U</div>
+</div>
+
+<div class="wrap">
+  <div class="side">
+    <a class="on">&#128100; Account Details</a>
+    <a href="#rem">&#128276; My Reminders</a>
+    <a href="dashboard.html#items">&#128196; My Items</a>
+    <a href="add.html">&#10133; Add Item</a>
+    <a href="dashboard.html">&#127968; Dashboard</a>
+    <a id="logout">&#128682; Log Out</a>
+  </div>
+
+  <div>
+    <div class="banner">
+      <div class="big" id="big">U</div>
+      <div><h1 id="nm">...</h1><p id="em"></p></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Personal Information <button class="btn" id="editBtn">Edit</button></h2>
+        <div class="row"><span>Full Name</span><b id="fName">-</b></div>
+        <div class="row"><span>Email Address</span><b id="fEmail">-</b></div>
+        <div class="row"><span>Phone Number</span><b id="fPhone">-</b></div>
+        <div class="row"><span>Location</span><b id="fLoc">-</b></div>
+        <div class="row"><span>Password</span><b><a href="login.html" style="color:#2563eb" onclick="fetch('/api/logout',{method:'POST'}).finally(function(){location.href='login.html';});return false;">Change password</a></b></div>
+      </div>
+
+      <div class="card">
+        <h2>Account Overview</h2>
+        <div class="tiles">
+          <div class="tile t1"><b id="nRem">0</b>Active Reminders</div>
+          <div class="tile t2"><b id="nProd">0</b>Registered Products</div>
+          <div class="tile t3"><b id="nSafe">0</b>Safe Items</div>
+          <div class="tile t4"><b id="nExp">0</b>Expired Items</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Quick Actions</h2>
+        <div class="act">
+          <a class="a1" href="add.html">Add Item <span>&rarr;</span></a>
+          <a class="a2" href="dashboard.html#items">My Items <span>&rarr;</span></a>
+          <a class="a3" href="dashboard.html">Dashboard <span>&rarr;</span></a>
+          <a class="a4" href="index.html">About <span>&rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Recently Added Items</h2>
+        <div id="recent"></div>
+      </div>
+    </div>
+
+    <div class="card" id="rem" style="margin-top:20px">
+      <h2>My Reminders (due within 30 days)</h2>
+      <div id="remList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function $(i){return document.getElementById(i);}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function ini(n){return n.trim().split(/\s+/).map(function(p){return p[0];}).join("").slice(0,2).toUpperCase()||"U";}
+var me={name:"",email:""}, editing=false;
+var items=[];try{items=JSON.parse(localStorage.getItem("billshieldItems")||"[]");}catch(e){}
+var prof={};try{prof=JSON.parse(localStorage.getItem("bsProfile")||"{}");}catch(e){}
+var labels={expiry:"Warranty",freeService:"Free service",insurance:"Insurance",puc:"PUC"};
+function days(d){var t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(d)-t)/864e5);}
+function status(it){
+  var ds=[it.expiry,it.freeService,it.insurance,it.puc].filter(Boolean).map(days);
+  if(!ds.length)return "Safe";
+  var m=Math.min.apply(null,ds);
+  return m<0?"Expired":m<=30?"Due Soon":"Safe";
+}
+function fullName(){return prof.name||me.name||"User";}
+function fill(){
+  var n=fullName();
+  $("nm").textContent=n; $("em").textContent=me.email;
+  $("big").textContent=ini(n); $("topAv").textContent=ini(n);
+  var ph=prof.phone||"Not added", lc=prof.location||"Not added";
+  if(editing){
+    $("fName").outerHTML='<input id="fName" value="'+esc(n)+'">';
+    $("fPhone").outerHTML='<input id="fPhone" value="'+esc(prof.phone||"")+'" placeholder="Phone number">';
+    $("fLoc").outerHTML='<input id="fLoc" value="'+esc(prof.location||"")+'" placeholder="City, country">';
+    $("editBtn").textContent="Save"; $("editBtn").className="btn pri";
+  } else {
+    $("fName").textContent=n; $("fEmail").textContent=me.email;
+    $("fPhone").textContent=ph; $("fLoc").textContent=lc;
+    $("editBtn").textContent="Edit"; $("editBtn").className="btn";
+  }
+  $("fEmail").textContent=me.email;
+}
+function stats(){
+  var rem=[],safe=0,exp=0;
+  items.forEach(function(it){
+    var s=status(it); if(s==="Safe")safe++; if(s==="Expired")exp++;
+    Object.keys(labels).forEach(function(k){
+      if(it[k]){var d=days(it[k]); if(d<=30)rem.push({d:d,t:esc(it.name)+" \u2013 "+labels[k]});}
+    });
+  });
+  rem.sort(function(a,b){return a.d-b.d;});
+  $("nRem").textContent=rem.length; $("badge").textContent=rem.length;
+  $("nProd").textContent=items.length; $("nSafe").textContent=safe; $("nExp").textContent=exp;
+  var h="";
+  rem.forEach(function(x){
+    var c=x.d<0?"red":"org";
+    var w=x.d<0?"expired "+(-x.d)+" day(s) ago":x.d===0?"ends today":"ends in "+x.d+" day(s)";
+    h+='<div class="item"><b>'+x.t+'</b><i class="'+c+'">'+w+'</i></div>';
+  });
+  $("remList").innerHTML=h||'<div class="empty">You\'re all set! Nothing is due within 30 days.</div>';
+  var rc="";
+  items.slice(-4).reverse().forEach(function(it){
+    var s=status(it), c=s==="Expired"?"red":s==="Due Soon"?"org":"grn";
+    rc+='<div class="item"><b>'+esc(it.name)+'</b><i class="'+c+'">'+s+'</i></div>';
+  });
+  $("recent").innerHTML=rc||'<div class="empty">No items yet. Click Add Item to start.</div>';
+}
+$("editBtn").onclick=function(){
+  if(!editing){editing=true;fill();return;}
+  prof={name:$("fName").value.trim(),phone:$("fPhone").value.trim(),location:$("fLoc").value.trim()};
+  try{
+    localStorage.setItem("bsProfile",JSON.stringify(prof));
+    if(prof.name)localStorage.setItem("bsName",prof.name);
+  }catch(e){}
+  editing=false;
+  location.reload();
+};
+$("logout").onclick=function(){
+  try{localStorage.removeItem("billshieldCurrent");}catch(e){}
+  fetch("/api/logout",{method:"POST",keepalive:true}).finally(function(){location.href="login.html";});
+};
+fetch("/api/me").then(function(r){
+  if(r.status===401){location.href="login.html";return null;}
+  return r.json();
+}).then(function(u){
+  if(!u)return;
+  me.name=u.name||"User"; me.email=u.email||"";
+  fill(); stats();
+});
+</script>
+</body>
+</html>

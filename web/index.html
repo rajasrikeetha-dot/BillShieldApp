@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill Shield - Never Miss a Warranty Again</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1b4d;--blue:#2563eb;--blue2:#1d4ed8;--sky:#60a5fa;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--green:#16a34a;--orange:#f97316;--red:#ef4444;--yellow:#facc15}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:#f4f7ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);z-index:-1;opacity:.55}
+.b1{width:520px;height:520px;background:#bfd4ff;top:-120px;left:-120px}
+.b2{width:460px;height:460px;background:#e6d5ff;top:120px;right:-140px}
+.b3{width:380px;height:380px;background:#c7f0ff;bottom:-100px;left:30%}
+
+/* NAV */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 32px));z-index:50;display:flex;align-items:center;justify-content:space-between;padding:10px 14px 10px 22px;border-radius:60px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.8);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 14px 40px rgba(15,23,42,.12)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:22px;color:var(--navy)}
+.logo span{color:var(--blue)}
+.links{display:flex;gap:6px}
+.links a{padding:9px 16px;border-radius:30px;font-weight:600;font-size:14px;color:#334155;transition:.2s}
+.links a:hover{background:#e8efff;color:var(--blue)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:40px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s;cursor:pointer;border:0}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--navy);color:#fff;padding:11px 22px;font-size:14px}
+.btn-primary{background:linear-gradient(135deg,#3b82f6,var(--blue2));color:#fff;box-shadow:0 12px 28px rgba(37,99,235,.38)}
+.btn-ghost{background:#fff;color:var(--navy);border:1.5px solid #cbd5e1}
+
+/* HERO */
+.hero{padding:140px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:30px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #dbe5ff;padding:7px 14px;border-radius:30px;font-size:13px;font-weight:700;color:var(--blue);box-shadow:0 6px 18px rgba(37,99,235,.1)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(22,163,74,.2)}
+h1{font-size:64px;line-height:1.04;font-weight:800;letter-spacing:-2px;margin:20px 0 18px;color:var(--navy)}
+h1 em{font-style:normal;background:linear-gradient(90deg,#2563eb,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;line-height:1.65;color:var(--muted);max-width:500px}
+.cta{display:flex;gap:14px;margin:30px 0 28px;flex-wrap:wrap}
+.trust{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;font-weight:600;color:#475569}
+.trust span::before{content:"";display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat;vertical-align:-4px;margin-right:7px}
+
+/* STAGE (devices) */
+.stage{position:relative;height:540px}
+.laptop{position:absolute;left:0;top:50px;width:470px;animation:bob 7s ease-in-out infinite}
+.screen{background:#0f172a;border-radius:16px 16px 6px 6px;padding:10px;box-shadow:0 40px 70px rgba(15,23,42,.35),0 0 0 2px #1e293b inset}
+.base{height:14px;background:linear-gradient(#cbd5e1,#94a3b8);border-radius:0 0 18px 18px;margin:0 -26px;box-shadow:0 18px 30px rgba(15,23,42,.25)}
+.mini{display:grid;grid-template-columns:62px 1fr;height:290px;border-radius:8px;overflow:hidden;background:#eef3ff;font-size:9px}
+.m-side{background:linear-gradient(#0a1850,#12379c);padding:12px 8px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.m-side b{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.15);display:block}
+.m-side b:first-child{background:var(--blue)}
+.m-main{padding:10px}
+.m-hero{height:56px;border-radius:10px;background:linear-gradient(120deg,#1d4ed8,#6d28d9);color:#fff;padding:10px 12px;font-weight:700;font-size:11px}
+.m-hero small{display:block;font-weight:500;opacity:.85;margin-top:3px;font-size:8px}
+.m-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.m-stats div{border-radius:8px;padding:7px;color:#fff;font-weight:700;font-size:8px}
+.m-stats b{display:block;font-size:15px}
+.m-row{display:flex;align-items:center;gap:7px;background:#fff;border-radius:8px;padding:7px 9px;margin-bottom:5px;font-weight:600;font-size:9px}
+.m-row i{width:7px;height:7px;border-radius:50%}
+.m-row em{margin-left:auto;font-style:normal;font-size:8px;font-weight:700}
+.phone{position:absolute;right:6px;top:0;width:200px;height:400px;background:#0f172a;border-radius:34px;padding:9px;box-shadow:0 40px 70px rgba(15,23,42,.4);transform:rotate(5deg);animation:bob2 6s ease-in-out infinite}
+.p-screen{height:100%;border-radius:26px;background:linear-gradient(170deg,#1e40af,#7c3aed 70%,#db2777);padding:34px 12px 12px;position:relative;overflow:hidden}
+.p-screen::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:62px;height:16px;border-radius:12px;background:#0f172a}
+.p-time{color:#fff;text-align:center;font-size:36px;font-weight:700;margin:4px 0 14px}
+.notif{background:rgba(255,255,255,.88);border-radius:14px;padding:9px 11px;margin-bottom:8px;font-size:10px;box-shadow:0 8px 18px rgba(0,0,0,.15)}
+.notif b{display:block;font-size:10.5px;color:var(--navy)}
+.notif span{color:#475569}
+.notif.o{border-left:4px solid var(--orange)}.notif.r{border-left:4px solid var(--red)}.notif.g{border-left:4px solid var(--green)}
+.float{position:absolute;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);border:1px solid #fff;border-radius:18px;padding:12px 16px;box-shadow:0 20px 40px rgba(15,23,42,.16);font-size:13px;display:flex;gap:11px;align-items:center}
+.float .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff}
+.float b{display:block;color:var(--navy)}.float small{color:var(--muted)}
+.f1{left:-18px;top:0;animation:bob2 5s ease-in-out infinite}
+.f2{left:40px;bottom:10px;animation:bob 6s ease-in-out infinite}
+.f3{right:-10px;bottom:56px;animation:bob 5.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-12px)}}
+@keyframes bob2{50%{transform:translateY(10px) rotate(0deg)}}
+.phone{--r:5deg}
+
+/* SECTIONS */
+section{padding:84px 0}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--blue);text-transform:uppercase}
+h2{font-size:42px;letter-spacing:-1.2px;color:var(--navy);margin:12px 0 14px;line-height:1.12}
+.sub{color:var(--muted);font-size:17px;line-height:1.65;max-width:560px}
+.center{text-align:center}.center .sub{margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+.stat{background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border:1px solid #fff;border-radius:22px;padding:26px;text-align:center;box-shadow:0 14px 34px rgba(37,99,235,.08)}
+.stat b{display:block;font-size:44px;letter-spacing:-1px;color:var(--blue)}
+.stat span{color:var(--muted);font-weight:600;font-size:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.card{background:#fff;border-radius:24px;padding:30px;border:1px solid #e8eefc;box-shadow:0 12px 30px rgba(15,23,42,.05);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 26px 50px rgba(37,99,235,.16)}
+.ico{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;margin-bottom:20px;color:#fff;box-shadow:0 12px 24px rgba(0,0,0,.14)}
+.card h3{font-size:19px;margin-bottom:8px;color:var(--navy)}
+.card p{color:var(--muted);line-height:1.6;font-size:15px}
+
+/* VEHICLE */
+.veh{background:linear-gradient(135deg,#0a1850,#1e3a8a 55%,#5b21b6);border-radius:40px;padding:64px;color:#fff;position:relative;overflow:hidden;margin:0 24px}
+.veh::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.07)}
+.veh h2{color:#fff}.veh .sub{color:#c7d6ff}.veh .eyebrow{color:#93c5fd}
+.line{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;position:relative}
+.line::before{content:"";position:absolute;top:15px;left:6%;right:6%;height:3px;background:rgba(255,255,255,.25);border-radius:3px}
+.step{position:relative;padding-top:42px}
+.step i{position:absolute;top:2px;left:0;width:28px;height:28px;border-radius:50%;border:4px solid #1e3a8a;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.step b{display:block;font-size:17px;margin-bottom:4px}
+.step small{color:#c7d6ff;font-size:13.5px;line-height:1.5;display:block}
+.tag{display:inline-block;margin-top:9px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(255,255,255,.14)}
+
+/* HOW */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
+.how .card{text-align:center;position:relative;padding-top:44px}
+.num{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 10px 22px rgba(37,99,235,.4)}
+
+/* FAQ */
+.faq{max-width:780px;margin:40px auto 0}
+details{background:#fff;border:1px solid #e8eefc;border-radius:18px;padding:20px 24px;margin-bottom:12px;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;color:var(--navy)}
+summary::after{content:"+";font-size:22px;color:var(--blue);line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin-top:12px;color:var(--muted);line-height:1.65}
+
+/* CTA + FOOTER */
+.band{background:linear-gradient(120deg,#1d4ed8,#7c3aed);border-radius:36px;padding:56px;text-align:center;color:#fff;box-shadow:0 30px 60px rgba(37,99,235,.35)}
+.band h2{color:#fff;margin-top:0}
+.band .btn{background:var(--yellow);color:var(--navy);margin-top:18px}
+footer{padding:50px 0 40px;color:var(--muted);font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:960px){
+.links{display:none}
+.hero-grid{grid-template-columns:1fr}
+h1{font-size:44px}
+.stage{height:480px;transform:scale(.82);transform-origin:top center;margin-bottom:-70px}
+.stats,.grid3,.how{grid-template-columns:1fr 1fr}
+.veh{padding:40px 24px;margin:0 12px}.line{grid-template-columns:1fr 1fr}.line::before{display:none}
+h2{font-size:32px}
+}
+@media(max-width:600px){.stats,.grid3,.how,.line{grid-template-columns:1fr}.stage{transform:scale(.6);margin-bottom:-170px}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+<symbol id="shield" viewBox="0 0 38 42"><path d="M19 2L35 8V21C35 31 28 38 19 40C10 38 3 31 3 21V8Z" fill="url(#sg)"/><path d="M11 21L17 27L27 15" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#"><svg width="34" height="38"><use href="#shield"/></svg>Bill <span>Shield</span></a>
+  <nav class="links"><a href="#features">Features</a><a href="#vehicles">Vehicles</a><a href="#how">How it works</a><a href="#faq">FAQs</a></nav>
+  <a class="btn btn-dark" href="login.html">Login / Sign Up</a>
+</header>
+
+<main>
+<section class="hero"><div class="container hero-grid">
+  <div>
+    <span class="pill"><i></i>Warranty and bill reminder system</span>
+    <h1>Never miss a <em>warranty</em> again.</h1>
+    <p class="lead">Keep every bill, warranty card and vehicle paper in one place. Bill Shield warns you before anything expires, so you never pay for a repair you were covered for.</p>
+    <div class="cta"><a class="btn btn-primary" href="add.html">Get Started Free &rarr;</a><a class="btn btn-ghost" href="#how">&#9654; See how it works</a></div>
+    <div class="trust"><span>Free to use</span><span>Private and secure</span><span>Vehicle ready</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="laptop"><div class="screen"><div class="mini">
+      <div class="m-side"><b></b><b></b><b></b><b></b></div>
+      <div class="m-main">
+        <div class="m-hero">Good evening, Rajasri!<small>Stay on top of your warranties</small></div>
+        <div class="m-stats">
+          <div style="background:#3b82f6"><b>12</b>Total</div><div style="background:#16a34a"><b>9</b>Safe</div>
+          <div style="background:#f97316"><b>2</b>Due soon</div><div style="background:#ef4444"><b>1</b>Expired</div>
+        </div>
+        <div class="m-row"><i style="background:#f97316"></i>Honda Activa - Free service<em style="color:#f97316">7 days</em></div>
+        <div class="m-row"><i style="background:#16a34a"></i>Samsung Fridge - Warranty<em style="color:#16a34a">214 days</em></div>
+        <div class="m-row"><i style="background:#ef4444"></i>Car Insurance<em style="color:#ef4444">Expired</em></div>
+      </div></div></div><div class="base"></div></div>
+
+    <div class="phone"><div class="p-screen">
+      <div class="p-time">9:41</div>
+      <div class="notif o"><b>Free service due</b><span>Honda Activa - in 7 days</span></div>
+      <div class="notif r"><b>Insurance expired</b><span>Renew your car policy today</span></div>
+      <div class="notif g"><b>All safe</b><span>Samsung Fridge - 214 days left</span></div>
+    </div></div>
+
+    <div class="float f1"><div class="ic" style="background:linear-gradient(135deg,#fb923c,#f97316)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 21h4"/></svg></div><div><b>Free service</b><small>Honda Activa - 7 days</small></div></div>
+    <div class="float f2"><div class="ic" style="background:linear-gradient(135deg,#22c55e,#15803d)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><div><b>All protected</b><small>9 items are safe</small></div></div>
+    <div class="float f3"><svg width="40" height="44"><use href="#shield"/></svg><div><b>Bill Shield</b><small>Always watching</small></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:20px"><div class="container reveal"><div class="stats">
+  <div class="stat"><b data-count="30">0</b><span>Days early reminders</span></div>
+  <div class="stat"><b data-count="4">0</b><span>Item categories</span></div>
+  <div class="stat"><b data-count="4">0</b><span>Vehicle dates tracked</span></div>
+  <div class="stat"><b data-count="1">0</b><span>Dashboard for everything</span></div>
+</div></div></section>
+
+<section id="features"><div class="container">
+  <div class="center reveal"><div class="eyebrow">Features</div><h2>Everything you need to stay protected</h2><p class="sub">Built for real life: phones, fridges, bikes, cars and every bill in between.</p></div>
+  <div class="grid3">
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#60a5fa,#2563eb)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M8 3v4M16 3v4"/></svg></div><h3>Track every warranty</h3><p>Store products, appliances and bills with purchase and expiry dates in one clean list.</p></div>
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#fb923c,#ea580c)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 21h4"/></svg></div><h3>Smart reminders</h3><p>Get flagged 30 days before anything expires, with clear orange and red warnings.</p></div>
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#34d399,#059669)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-5h11L19 16M4 16h16v3H4zM7 19v1.5M17 19v1.5"/></svg></div><h3>Vehicle care</h3><p>Free first service, other free services, insurance and PUC dates for every vehicle you own.</p></div>
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div><h3>Private and secure</h3><p>Your account is password protected and your data stays under your control.</p></div>
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#f472b6,#db2777)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></div><h3>Search and filter</h3><p>Find any item in seconds by name, category or vehicle number.</p></div>
+    <div class="card reveal"><div class="ico" style="background:linear-gradient(135deg,#38bdf8,#0284c7)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Clear dashboard</h3><p>See what is safe, due soon and expired at a glance, with colors that make sense.</p></div>
+  </div>
+</div></section>
+
+<section id="vehicles" style="padding:30px 0"><div class="veh reveal">
+  <div class="eyebrow">For your vehicles</div>
+  <h2>Every vehicle date, on one timeline</h2>
+  <p class="sub">Bikes and cars come with many deadlines. Bill Shield keeps all of them visible so nothing slips.</p>
+  <div class="line">
+    <div class="step"><i style="background:#f97316"></i><b>Free first service</b><small>Collect the free service your dealer promised.</small><span class="tag">Due soon</span></div>
+    <div class="step"><i style="background:#22c55e"></i><b>Warranty</b><small>Know exactly when your vehicle warranty ends.</small><span class="tag">3 years left</span></div>
+    <div class="step"><i style="background:#60a5fa"></i><b>Insurance</b><small>Renew on time and avoid fines or gaps in cover.</small><span class="tag">Renew yearly</span></div>
+    <div class="step"><i style="background:#facc15"></i><b>PUC certificate</b><small>Keep your pollution certificate always valid.</small><span class="tag">Renew yearly</span></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="container">
+  <div class="center reveal"><div class="eyebrow">How it works</div><h2>Just 3 simple steps</h2></div>
+  <div class="how">
+    <div class="card reveal"><div class="num">1</div><h3>Add your item</h3><p>Enter the product or vehicle details with its warranty date.</p></div>
+    <div class="card reveal"><div class="num">2</div><h3>Get reminded</h3><p>Bill Shield flags anything expiring in the next 30 days.</p></div>
+    <div class="card reveal"><div class="num">3</div><h3>Stay worry-free</h3><p>Claim repairs and renew papers on time, every time.</p></div>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-top:20px"><div class="container">
+  <div class="center reveal"><div class="eyebrow">FAQs</div><h2>Questions, answered</h2></div>
+  <div class="faq reveal">
+    <details><summary>Is Bill Shield free?</summary><p>Yes. You can add products and vehicles and see reminders without paying anything.</p></details>
+    <details><summary>What can I track?</summary><p>Electronics, appliances, vehicles and other bills, each with purchase and expiry dates.</p></details>
+    <details><summary>What vehicle dates are supported?</summary><p>Warranty expiry, free first service, insurance expiry and PUC certificate expiry.</p></details>
+    <details><summary>When will I be reminded?</summary><p>Anything expiring within 30 days is highlighted, and expired items turn red.</p></details>
+  </div>
+</div></section>
+
+<section style="padding-top:10px"><div class="container reveal"><div class="band">
+  <h2>Protect what you bought.</h2><p class="sub" style="color:#dbe6ff;margin:0 auto">Add your first item in under a minute.</p>
+  <a class="btn" href="add.html">Get Started Free &rarr;</a>
+</div></div></section>
+</main>
+
+<footer><div class="container foot">
+  <a class="logo" href="#"><svg width="26" height="29"><use href="#shield"/></svg>Bill <span>Shield</span></a>
+  <span>Never miss a warranty again. &copy; 2026 Bill Shield</span>
+</div></footer>
+
+<script>
+var nav=document.getElementById('nav');
+addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>20)});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){e.target.classList.add('in');
+    e.target.querySelectorAll('[data-count]').forEach(function(el){
+      var to=+el.dataset.count,n=0,t=setInterval(function(){n++;el.textContent=n;if(n>=to)clearInterval(t)},to>10?30:160)});
+    io.unobserve(e.target)}})},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
